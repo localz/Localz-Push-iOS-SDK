@@ -1,6 +1,6 @@
 //
-//  SpotzPushSDK.h
-//  SpotzPushSDK
+//  LocalzPushSDK.h
+//  LocalzPushSDK
 //
 //  Created by Melvin Artemas on 29/03/2015.
 //  Copyright (c) 2015 Localz Pty Ltd. All rights reserved.
@@ -10,32 +10,32 @@
 #import <Foundation/Foundation.h>
 #import <UserNotifications/UserNotifications.h>
 
-@class SpotzPush;
+@class LocalzPush;
 
-@protocol SpotzPushDelegate <NSObject>
+@protocol LocalzPushDelegate <NSObject>
 @optional
-- (void) spotzPush:(SpotzPush * _Nonnull)spotzPush failedToRegisterDevice:(NSError * _Nonnull)error;
-- (void) spotzPush:(SpotzPush * _Nonnull)spotzPush failedToUpdateDevice:(NSError * _Nonnull)error;
-- (void) spotzPush:(SpotzPush * _Nonnull)spotzPush didReceiveRemoteNotification:(NSDictionary * _Nullable)userInfo fetchCompletionHandler:(void(^ _Nullable)(UIBackgroundFetchResult result))completionHandler;
-- (void) spotzPushDidFinishRegistering:(SpotzPush * _Nonnull)spotzPush;
+- (void) LocalzPush:(LocalzPush * _Nonnull)LocalzPush failedToRegisterDevice:(NSError * _Nonnull)error;
+- (void) LocalzPush:(LocalzPush * _Nonnull)LocalzPush failedToUpdateDevice:(NSError * _Nonnull)error;
+- (void) LocalzPush:(LocalzPush * _Nonnull)LocalzPush didReceiveRemoteNotification:(NSDictionary * _Nullable)userInfo fetchCompletionHandler:(void(^ _Nullable)(UIBackgroundFetchResult result))completionHandler;
+- (void) LocalzPushDidFinishRegistering:(LocalzPush * _Nonnull)LocalzPush;
 
 - (void) userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center willPresentNotification:(UNNotification * _Nonnull)notification withCompletionHandler:(void (^ _Nullable)(UNNotificationPresentationOptions options))completionHandler __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0);
 - (void) userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center didReceiveNotificationResponse:(UNNotificationResponse * _Nonnull)response withCompletionHandler:(void(^_Nullable)(void))completionHandler __IOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0) __TVOS_PROHIBITED;
 @end
 
-@interface SpotzPush : NSObject
+@interface LocalzPush : NSObject
 
-@property (nullable,nonatomic,assign) id<SpotzPushDelegate, UNUserNotificationCenterDelegate> delegate;
+@property (nullable,nonatomic,assign) id<LocalzPushDelegate, UNUserNotificationCenterDelegate> delegate;
 
 
 /**
- * Returns the singleton instance of SpotzPush
+ * Returns the singleton instance of LocalzPush
  */
-+ (SpotzPush * _Nonnull) shared;
++ (LocalzPush * _Nonnull) shared;
 
 /**
  *  Initialise service and register device with the given API Key and client Key. Call this method inside the AppDelegate's didFinishLaunching.
- *  This will setup push with default UIUserNotificationTypes and no categories. Use this init method if you want to have the flexibility to place the iOS Push notification permission popup in your app by calling [[SpotzPush shared] startSpotzPush].
+ *  This will setup push with default UIUserNotificationTypes and no categories. Use this init method if you want to have the flexibility to place the iOS Push notification permission popup in your app by calling [[LocalzPush shared] startLocalzPush].
  *
  *  @param appId appId provided by Localz
  *  @param appKey appKey provided by Localz
@@ -49,7 +49,7 @@
  *
  *  @param appId appId provided by Localz
  *  @param appKey appKey provided by Localz
- *  @param start automatically starts Spotz Push if it is not yet started previously. This may popup the iOS push notification permission dialog.
+ *  @param start automatically starts Localz Push if it is not yet started previously. This may popup the iOS push notification permission dialog.
  *  @param config config for advance settings/debugging
  */
 + (void) initWithAppId:(NSString * _Nonnull)appId appKey:(NSString * _Nonnull)appKey start:(BOOL)start config:(NSDictionary * _Nullable)config;
@@ -61,7 +61,7 @@
  *
  *  @param appId appId provided by Localz
  *  @param appKey appKey provided by Localz
- *  @param start automatically starts Spotz Push if it is not yet started previously. This may popup the iOS push notification permission dialog.
+ *  @param start automatically starts Localz Push if it is not yet started previously. This may popup the iOS push notification permission dialog.
  *  @param types The notification types that your app supports. For a list of possible values, see the constants for the UIUserNotificationType type.
  *  @param categories A set of UIUserNotificationCategory objects that define the groups of actions a notification may include.
  *  @param config config for advance settings/debugging
@@ -75,7 +75,7 @@
  *
  *  @param appId appId provided by Localz
  *  @param appKey appKey provided by Localz
- *  @param start automatically starts Spotz Push if it is not yet started previously. This may popup the iOS push notification permission dialog.
+ *  @param start automatically starts Localz Push if it is not yet started previously. This may popup the iOS push notification permission dialog.
  *  @param options The notification types that your app supports. For a list of possible values, see the constants for the UNAuthorizationOptions type.
  *  @param categories A set of UNNotificationCategory objects that define the groups of actions a notification may include.
  *  @param config config for advance settings/debugging
@@ -87,13 +87,13 @@
  *  Enables push notification with default alerts with default settings.
  *  Call this method when the time is right to prompt user to accept notifications.
  */
-- (void) startSpotzPush;
+- (void) startLocalzPush;
 
 /**
- *  Returns SpotzPush started status.
- *  @return true if spotz push is started, false if not.
+ *  Returns LocalzPush started status.
+ *  @return true if Localz push is started, false if not.
  */
-- (BOOL) isSpotzPushStarted;
+- (BOOL) isLocalzPushStarted;
 
 /**
  *  Enables location services. If user has not yet enabled location services, this will prompt the permission dialog.
@@ -132,7 +132,7 @@
 - (void) appFailedToRegisterForRemoteNotificationsWithError:(NSError * _Nullable)error;
 
 /**
- *  Handles the remote notification for SpotzPush purposes
+ *  Handles the remote notification for LocalzPush purposes
  *
  *  @param userInfo dictionary of the push notification
  *  @param state state of the application. Default is to pass [UIApplication sharedApplication].applicationState.
@@ -140,7 +140,7 @@
 - (void) appReceivedRemoteNotification:(NSDictionary * _Nonnull)userInfo applicationState:(UIApplicationState)state;
 
 /**
- *  Handles the remote notification for SpotzPush purposes
+ *  Handles the remote notification for LocalzPush purposes
  *
  *  @param userInfo dictionary of the push notification
  *  @param state state of the application. Default is to pass [UIApplication sharedApplication].applicationState.

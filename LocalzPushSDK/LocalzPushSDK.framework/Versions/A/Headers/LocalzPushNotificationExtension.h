@@ -1,6 +1,6 @@
 //
-//  SpotzPushNotificationExtension.h
-//  SpotzPushSDK
+//  LocalzPushNotificationExtension.h
+//  LocalzPushSDK
 //
 //  Created by Daniel Sykes-Turner on 3/8/17.
 //  Copyright © 2017 Localz Pty Ltd. All rights reserved.
@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
 
-@interface SpotzPushNotificationExtension : NSObject
+@interface LocalzPushNotificationExtension : NSObject
 
 /**
- * Returns the singleton instance of SpotzPush
+ * Returns the singleton instance of LocalzPush
  */
-+ (SpotzPushNotificationExtension * _Nonnull) shared;
++ (LocalzPushNotificationExtension * _Nonnull) shared;
 
 /**
  *  Supply the notifiation extension instance with authentication keys
@@ -38,7 +38,7 @@
 - (void) serviceExtensionTimeWillExpire;
 
 /**
- *  Call the content handler completion block plus any other preperations. This is for the app to call if it performs any other operations and does not need to wait for SpotzPush to finish
+ *  Call the content handler completion block plus any other preperations. This is for the app to call if it performs any other operations and does not need to wait for LocalzPush to finish
  */
 - (void) contentComplete;
 
