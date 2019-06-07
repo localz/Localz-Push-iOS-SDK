@@ -296,5 +296,5 @@ For bugs, feature requests, or other questions, [file an issue](https://github.c
 
 License
 =======
-Copyright 2017 Localz Pty Ltd
+Copyright 2019 Localz Pty Ltd
 
