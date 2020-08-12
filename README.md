@@ -3,7 +3,7 @@ Localz Push SDK
 
 ## Requirements
 
-- iOS 8 or newer to use LocalzPushSDK
+- iOS 9 or newer to use LocalzPushSDK
 - iOS 10 or newer to use LocalzPushSDK rich notifications (attachments, notification recalling, reliable confirmations)
 
 # Getting Started
