@@ -18,9 +18,6 @@
 - (void) LocalzPush:(LocalzPush * _Nonnull)LocalzPush failedToUpdateDevice:(NSError * _Nonnull)error;
 - (void) LocalzPush:(LocalzPush * _Nonnull)LocalzPush didReceiveRemoteNotification:(NSDictionary * _Nullable)userInfo fetchCompletionHandler:(void(^ _Nullable)(UIBackgroundFetchResult result))completionHandler;
 - (void) LocalzPushDidFinishRegistering:(LocalzPush * _Nonnull)LocalzPush;
-
-- (void) userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center willPresentNotification:(UNNotification * _Nonnull)notification withCompletionHandler:(void (^ _Nullable)(UNNotificationPresentationOptions options))completionHandler __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0);
-- (void) userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center didReceiveNotificationResponse:(UNNotificationResponse * _Nonnull)response withCompletionHandler:(void(^_Nullable)(void))completionHandler __IOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0) __TVOS_PROHIBITED;
 @end
 
 @interface LocalzPush : NSObject
@@ -57,20 +54,6 @@
 /**
  *  Initialise service and register device with the given API Key and client Key. Call this method inside the AppDelegate's didFinishLaunching.
  *  This will setup push with default UIUserNotificationTypes and no categories.
- *  For versions earlier than iOS 10
- *
- *  @param appId appId provided by Localz
- *  @param appKey appKey provided by Localz
- *  @param start automatically starts Localz Push if it is not yet started previously. This may popup the iOS push notification permission dialog.
- *  @param types The notification types that your app supports. For a list of possible values, see the constants for the UIUserNotificationType type.
- *  @param categories A set of UIUserNotificationCategory objects that define the groups of actions a notification may include.
- *  @param config config for advance settings/debugging
- */
-+ (void) initWithAppId:(NSString * _Nonnull)appId appKey:(NSString * _Nonnull)appKey start:(BOOL)start userTypes:(UIUserNotificationType)types categories:(NSSet * _Nullable)categories config:(NSDictionary * _Nullable)config;
-
-/**
- *  Initialise service and register device with the given API Key and client Key. Call this method inside the AppDelegate's didFinishLaunching.
- *  This will setup push with default UIUserNotificationTypes and no categories.
  *  For versions greater than iOS 10 ONLY
  *
  *  @param appId appId provided by Localz
@@ -80,7 +63,7 @@
  *  @param categories A set of UNNotificationCategory objects that define the groups of actions a notification may include.
  *  @param config config for advance settings/debugging
  */
-+ (void) initWithAppId:(NSString * _Nonnull)appId appKey:(NSString * _Nonnull)appKey start:(BOOL)start authorizationOptions:(UNAuthorizationOptions)options categories:(NSSet * _Nullable)categories config:(NSDictionary * _Nonnull)config __IOS_AVAILABLE(10.0);
++ (void) initWithAppId:(NSString * _Nonnull)appId appKey:(NSString * _Nonnull)appKey start:(BOOL)start authorizationOptions:(UNAuthorizationOptions)options categories:(NSSet * _Nullable)categories config:(NSDictionary * _Nonnull)config;
 
 
 /**
@@ -118,13 +101,6 @@
 - (void) appRegisteredForRemoteNotificationsWithDeviceToken:(NSData * _Nonnull)deviceToken deviceName:(NSString * _Nonnull)deviceName;
 
 /**
- *  Register app user notification settings. Call this in AppDelegate's didRegisterUserNotificationSettings
- *  
- *  @param notificationSettings A set of UIUserNotificationCategory objects that define the groups of actions a notification may include.
- */
-- (void) appRegisteredUserNotificationSettings:(UIUserNotificationSettings * _Nonnull)notificationSettings;
-
-/**
  *  Handles the errors when registering for push notification.
  *
  *  @param error error returned from didFailToRegisterForRemoteNotificationsWithError
@@ -136,25 +112,11 @@
  *
  *  @param userInfo dictionary of the push notification
  *  @param state state of the application. Default is to pass [UIApplication sharedApplication].applicationState.
- */
-- (void) appReceivedRemoteNotification:(NSDictionary * _Nonnull)userInfo applicationState:(UIApplicationState)state;
-
-/**
- *  Handles the remote notification for LocalzPush purposes
- *
- *  @param userInfo dictionary of the push notification
- *  @param state state of the application. Default is to pass [UIApplication sharedApplication].applicationState.
  *  @param completionHandler block after fetch result
  */
 - (void) appReceivedRemoteNotification:(NSDictionary * _Nonnull)userInfo applicationState:(UIApplicationState)state fetchCompletionHandler:(void (^ _Nullable)(UIBackgroundFetchResult))completionHandler;
 
-- (void) appReceivedActionWithIdentifier:(NSString * _Nonnull)identifier notification:(NSDictionary * _Nonnull)userInfo applicationState:(UIApplicationState)state completionHandler:(void (^ _Nullable)(void)) handler;
-
 - (void) appPerformFetchWithCompletionHandler:(void (^ _Nullable)(UIBackgroundFetchResult))completionHandler;
-
-- (void) userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center willPresentNotification:(UNNotification * _Nonnull)notification withCompletionHandler:(void (^ _Nullable)(UNNotificationPresentationOptions options))completionHandler NS_AVAILABLE_IOS(10.0);
-
-- (void) userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center didReceiveNotificationResponse:(UNNotificationResponse * _Nonnull)response withCompletionHandler:(void(^ _Nullable)(void))completionHandler NS_AVAILABLE_IOS(10.0);
 
 #pragma mark Push helpers
 

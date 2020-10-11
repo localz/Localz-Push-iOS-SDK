@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   
 	s.name	= 'LocalzPushSDK'
-        s.version = '2.0.4'
-	s.platform = :ios,'9.0'
-	s.ios.deployment_target = '9.0'
+        s.version = '4.0.0'
+	s.platform = :ios,'10.0'
+	s.ios.deployment_target = '10.0'
 	s.license = {
 		:type => 'Commercial',
 		:text => <<-LICENSE
