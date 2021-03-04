@@ -9,6 +9,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <Foundation/Foundation.h>
 #import <UserNotifications/UserNotifications.h>
+#import "LocalzPushNotificationExtension.h"
 
 @class LocalzPush;
 

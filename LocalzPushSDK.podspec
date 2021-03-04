@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
   
 	s.name	= 'LocalzPushSDK'
-        s.version = '4.0.1'
+        s.version = '4.0.2'
 	s.platform = :ios,'10.0'
 	s.ios.deployment_target = '10.0'
 	s.license = {
 		:type => 'Commercial',
 		:text => <<-LICENSE
-			Copyright 2020 Localz Pty Ltd.
+			Copyright 2021 Localz Pty Ltd.
 			LICENSE
 	}
 	s.summary = 'iOS library for LocalzPush'
