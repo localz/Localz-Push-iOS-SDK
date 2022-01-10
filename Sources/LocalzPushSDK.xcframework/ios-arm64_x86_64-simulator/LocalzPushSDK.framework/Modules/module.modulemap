@@ -1,0 +1,6 @@
+framework module LocalzPushSDK {
+  umbrella header "LocalzPushSDK.h"
+
+  export *
+  module * { export * }
+}
